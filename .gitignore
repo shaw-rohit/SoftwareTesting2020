@@ -1,1 +1,11 @@
+# Byte-compiled
+.cache
+.pytest_cache/
+
+# Environments
+.venv
 venv/
+venv.bak/
+
+# OS
+.DS_Store
