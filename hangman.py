@@ -14,28 +14,33 @@ def hangman_print_dashes(word):
     Generates a standard hint and the number of dashes based on the word
     previously selected 
     """
+    hangman_clear_screen()
     no_of_dashes = len(word)
-    print_dashes = '_' * no_of_dashes 
-    print(print_dashes, '\n')
+    print_dashes = "_" * no_of_dashes 
+    print("Word: {0} ".format(" ".join(print_dashes)))
     return print_dashes
 
 
 def hangman_get_letter():
-    user_guess = input("Please guess a letter! ").upper()
+    user_guess = input("Please guess a letter: ").upper()
+    hangman_clear_screen()
     return user_guess
 
+def hangman_clear_screen():
+    for i in range(1):
+        print("\n")
 
 def hangman_algorithm(word):
     """
-    Some text here
+    The main logic that checks user guesses 
     """
     user_guess_list = []
     attempts = 9
     guessed = False
+    valid_indices = []
 
-    print("Starting game.....")
     print_dashes = hangman_print_dashes(word)
-    print("Hint: It\'s a city!")
+    print("(It\'s a city with {0} letters!) \n".format(len(word)))
 
     print_dashes_list = list(print_dashes)
     word_list = list(word)
@@ -48,40 +53,49 @@ def hangman_algorithm(word):
         if (len(user_guess) == 1 and user_guess.isalpha()):
             if user_guess in user_guess_list:
                 print("You've already guessed this letter! Try again!")
-                print(print_dashes)
+                print("Word: {0}".format(" ".join(print_dashes)))
             elif user_guess not in word:
-                print("Sorry! ", user_guess, " is not in the word. Try again!")
+                print("Sorry! {0} is not in the word. Try again!".format(user_guess))
                 user_guess_list.append(user_guess)
                 attempts -= 1
-                print(print_dashes)
+                print("Word: {0}".format(" ".join(print_dashes)))
+                print("(It\'s a city with {0} letters!) \n".format(len(word)))
             else:
-                # Correct Guess
                 print("This letter is in the word!")
                 user_guess_list.append(user_guess)
 
-                valid_indices = []
-
-                for index, letter in enumerate(word):
-                    if letter == user_guess:
-                        valid_indices += [index]
+                valid_indices = [index for index, letter in enumerate(word) if 
+                        letter == user_guess]
 
                 for index in valid_indices:
                     print_dashes_list[index] = user_guess
 
                 print_dashes = "".join(print_dashes_list)
-                print(print_dashes)
-                
-                if '_' not in print_dashes:
+                print("Word: {0}".format(" ".join(print_dashes)))
+                print("(It\'s a city with {0} letters!) \n".format(len(word)))
+
+                if "_" not in print_dashes:
                     guessed = True
 
         else:
-            print("Please enter a valid input. Only a single English letter is allowed.")
+            print("Please enter a valid, single letter.")
+            print("Word: {0}".format(" ".join(print_dashes)))
+            print("(It\'s a city with {0} letters!) \n".format(len(word)))
 
     if guessed:
         print("Yay! You won the game!")
     else:
-        print("Sorry! You ran out of lives!")
+        print("Sorry! You ran out of lives! The answer is {0}".format(word))
 
+def main():
+    word = hangman_pick_word()
+    hangman_algorithm(word)
 
-if __name__ == '__main__':
-    hangman_algorithm(hangman_pick_word())
+    replay_question = input("Press Y to continue or any press any other key to exit.")
+
+    while replay_question.upper() == "Y":
+        word = hangman_pick_word()
+        hangman_algorithm(word)
+
+if __name__ == "__main__":
+    main()
