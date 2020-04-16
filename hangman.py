@@ -18,21 +18,27 @@ def hangman_game_display(word):
     print('Hint: It\'s a city!') 
     return no_of_dashes
 
-def hangman_algorithm(word, user_guess):
+def play_hangman():
+    user_guess = input("Please guess a letter! ").upper()
+    return user_guess
+
+def hangman_algorithm(word):
     """
     Some text here
     """
     user_guess_list = []
+    attempts = 9
+
     word_list = list(word)
     print(word_list)
-    if (len(user_guess) == 1 and user_guess.isalpha()):
-        print("Valid Input")
-    else:
-        print("Please enter a valid input. Only a single English letter is allowed.")
-    return user_guess
+
+    while not user_guess_list and attempts > 0:
+        user_guess = play_hangman()
+        if (len(user_guess) == 1 and user_guess.isalpha()):
+            print("User Guessed: ", user_guess)
+        else:
+            print("Please enter a valid input. Only a single English letter is allowed.")
 
 
 if __name__ == '__main__':
-    # print("RANDOM WORD:", pick_word())
-    # hangman_game_display(pick_word())
-    hangman_algorithm(pick_word(), "A")
+    hangman_algorithm(pick_word())
