@@ -36,6 +36,16 @@ def hangman_clear_screen():
     for i in range(1):
         print("\n")
 
+def hangman_win_lose(word, guessed):
+    """
+    Checks if the player won or lost and prints the information
+    """
+    if guessed:
+        print("Congratulations! You won the game!")
+    else:
+        print("Sorry you ran out of lives! The correct answer is {0} ".format(word))
+    return 
+
 def hangman_algorithm(word):
     """
     Sets user attemps and initial state of the game. Obtains user guesses and
@@ -93,10 +103,8 @@ def hangman_algorithm(word):
             print("Word: {0}".format(" ".join(print_dashes)))
             print("(It\'s a city with {0} letters!) \n".format(len(word)))
 
-    if guessed:
-        print("Yay! You won the game!")
-    else:
-        print("Sorry! You ran out of lives! The answer is {0}".format(word))
+    hangman_win_lose(word, guessed)
+
 
 def main():
     word = hangman_pick_word()
