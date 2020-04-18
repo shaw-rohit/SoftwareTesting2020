@@ -1,18 +1,24 @@
 import random
-from words import cities
+from words import words
 
 def hangman_pick_word():
     """
-    Randomly picks a word from the words.py file and converts to upper case.
+    Returns a randomly selected a theme and word 
     """
-    word = random.choice(cities).upper()
-    return word
+    theme = random.choice(list(words.keys()))
+    word = random.choice(words.get(theme)).upper()
+    return theme, word
+
+def hangman_print_hint(theme, word):
+    """
+    Generates a hint based on the category randomly chosen
+    """
+    print("It\'s a {0} with {1} letters!".format(theme, len(word)))
 
 
 def hangman_print_dashes(word):
     """
-    Generates a standard hint and the number of dashes based on the word
-    previously selected 
+    Prints the number of dashes based on the word previously selected 
     """
     hangman_clear_screen()
     no_of_dashes = len(word)
@@ -32,7 +38,7 @@ def hangman_get_letter():
 
 def hangman_clear_screen():
     """
-    Clears screen based on the range specifed.
+    Clears screen based on the range specifed
     """
     for i in range(1):
         print("\n")
@@ -49,7 +55,7 @@ def hangman_win_lose(word, guessed):
     return 
 
 
-def hangman_algorithm(word):
+def hangman_algorithm(theme, word):
     """
     Sets user attemps and initial state of the game. Obtains user guesses and
     checks for validity. If user guess is correct, displays the appropriate
@@ -57,41 +63,42 @@ def hangman_algorithm(word):
     attempts and informs user. If user guessed a previously guessed letter, no
     penealty for the user.
     """
-    user_guess_list = set()
+    user_guess_set = set()
     attempts = 9
     guessed = False
     valid_indices = []
 
     print_dashes = hangman_print_dashes(word)
-    print("(It\'s a city with {0} letters!) \n".format(len(word)))
+    hangman_print_hint(theme, word)
 
     print_dashes_list = list(print_dashes)
     word_list = list(word)
 
     while not guessed and attempts > 0:
         print("Remaining Lives: {0} ".format(attempts))
-        print("Letters Guessed: {0} ".format(user_guess_list))
+        print("Letters Guessed: {0} ".format(user_guess_set))
         user_guess = hangman_get_letter()
 
         if (len(user_guess) == 1 and user_guess.isalpha()):
-            if user_guess in user_guess_list:
+            if user_guess in user_guess_set:
                 print("You've already guessed this letter! Try again!")
                 print("Word: {0}".format(" ".join(print_dashes)))
+                hangman_print_hint(theme, word)
             elif user_guess not in word:
                 print("Sorry! {0} is not in the word. Try again!".format(user_guess))
-                user_guess_list.add(user_guess)
+                user_guess_set.add(user_guess)
                 attempts -= 1
                 print("Word: {0}".format(" ".join(print_dashes)))
-                print("(It\'s a city with {0} letters!) \n".format(len(word)))
+                hangman_print_hint(theme, word)
             else:
                 print("This letter is in the word!")
-                user_guess_list.add(user_guess)
+                user_guess_set.add(user_guess)
 
-                print_dashes = " ".join(letter if letter in user_guess_list else "_"
-                        for letter in word)
+                print_dashes = " ".join(letter if letter in user_guess_set
+                        else "_" for letter in word)
 
                 print("Word: {0}".format(print_dashes))
-                print("(It\'s a city with {0} letters!) \n".format(len(word)))
+                hangman_print_hint(theme, word)
 
                 if "_" not in print_dashes:
                     guessed = True
@@ -99,7 +106,7 @@ def hangman_algorithm(word):
         else:
             print("Please enter a valid, single letter.")
             print("Word: {0}".format(" ".join(print_dashes)))
-            print("(It\'s a city with {0} letters!) \n".format(len(word)))
+            hangman_print_hint(theme, word)
 
     hangman_win_lose(word, guessed)
 
@@ -107,15 +114,15 @@ def hangman_algorithm(word):
 def main():
     replay_trigger = "Y"
 
-    word = hangman_pick_word()
-    hangman_algorithm(word)
+    theme, word = hangman_pick_word()
+    hangman_algorithm(theme, word)
 
-    replay_question = input("Press Y to replay the game.\
-            Press any other key to exit game.")
+    replay_question = input("Enter Y to replay the game.\
+            Enter any other key to exit game.")
 
     while replay_question.upper() == replay_trigger:
-        word = hangman_pick_word()
-        hangman_algorithm(word)
+        theme, word = hangman_pick_word()
+        hangman_algorithm(theme, word)
 
 if __name__ == "__main__":
     main()
