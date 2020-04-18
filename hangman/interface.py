@@ -8,9 +8,6 @@ class Interface:
     def read_player_guess(self):
         return input("Please guess a letter: ").upper()
 
-    def write_credits(self):
-        print("***HANGMAN***")
-
     def write_hint(self, word):
         print("It is a city with {0} letters!".format(len(word)))
         print("Word: {0}".format(" ".join(word)))
@@ -40,4 +37,5 @@ class Interface:
         print("Sorry! You ran out of health! The answer is {0}".format(word))
 
     def clear(self):
-        for i in range(1): print("\n")
+        for i in range(1):
+            print("\n")
