@@ -22,17 +22,28 @@ def hangman_print_dashes(word):
 
 
 def hangman_get_letter():
+    """
+    Requests user to input a letter and converts it to upper case
+    """
     user_guess = input("Please guess a letter: ").upper()
     hangman_clear_screen()
     return user_guess
 
 def hangman_clear_screen():
+    """
+    Clears screen based on the range specifed.
+    """
     for i in range(1):
         print("\n")
 
 def hangman_algorithm(word):
     """
-    The main logic that checks user guesses 
+    Sets user attemps and initial state of the game. Obtains user guesses and
+    checks for validity. If user guess is correct, displays the appropriate
+    letters corresponding to the guess. If the user guess is invalid, decreases
+    attempts and informs user. If user guessed a previously guessed letter, no
+    penealty for the user. The user if informed if they won or lost the game at
+    the end.
     """
     user_guess_list = []
     attempts = 9
