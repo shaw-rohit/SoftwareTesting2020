@@ -11,9 +11,9 @@ class Interface:
     def write_credits(self):
         print("***HANGMAN***")
 
-    def write_hint(self, word):
-        print("It is a city with {0} letters!".format(len(word)))
-        print("Word: {0}".format(" ".join(word)))
+    def write_hint(self, hint, theme):
+        print("It is a {0} with {1} letters!".format(theme, len(hint)))
+        print("Word: {0}".format(" ".join(hint)))
 
     def write_health(self, health):
         print("Remaining lives: {0}".format(health))
