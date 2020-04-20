@@ -8,6 +8,9 @@ class Interface:
     def read_player_guess(self):
         return input("Please guess a letter: ").upper()
 
+    def read_replay(self):
+        return input("Enter Y to replay the game or any other key to exit: ")
+
     def write_credits(self):
         print("***HANGMAN***")
 

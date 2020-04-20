@@ -50,12 +50,6 @@ class Game:
         else:
             self.interface.write_lost(self.word)
 
-    def end(self):
-        pass
-
-    def restart(self):
-        pass
-
     def sethint(self, guess):
         for index in self.hist[guess]:
             self.hint = self.hint[:index] + guess + self.hint[index+1:]

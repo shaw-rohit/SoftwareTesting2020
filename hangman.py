@@ -6,7 +6,10 @@ if __name__ == "__main__":
     interface = Interface()
     interface.write_credits()
 
-    player = Player()
+    replay = "Y"
 
-    game = Game(player, interface)
-    game.start()
+    while replay[0].upper() == "Y":
+        player = Player()
+        game = Game(player, interface)
+        game.start()
+        replay = interface.read_replay()
