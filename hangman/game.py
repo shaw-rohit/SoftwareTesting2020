@@ -1,11 +1,12 @@
 import random
-from hangman.words import cities
+from hangman.words import words
 
 class Game:
     def __init__(self, player, interface):
         self.player    = player
         self.interface = interface
-        self.word      = random.choice(cities).upper()
+        self.theme     = random.choice(list(words.keys()))
+        self.word      = random.choice(words.get(self.theme)).upper()
         self.hint      = "_" * len(self.word)
         self.hist      = self.create_hist()
         self.guessed   = False
@@ -24,7 +25,7 @@ class Game:
     def start(self):
         while not self.guessed and self.player.health.gethealth() > 0:
             self.interface.clear()
-            self.interface.write_hint(self.hint)
+            self.interface.write_hint(self.hint, self.theme)
             self.interface.write_health(self.player.health.gethealth())
             self.interface.write_guessed_letters(self.player.guesses)
             guess = self.interface.read_player_guess()
@@ -48,12 +49,6 @@ class Game:
             self.interface.write_won()
         else:
             self.interface.write_lost(self.word)
-
-    def end(self):
-        pass
-
-    def restart(self):
-        pass
 
     def sethint(self, guess):
         for index in self.hist[guess]:
