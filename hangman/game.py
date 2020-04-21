@@ -1,4 +1,6 @@
 import random
+import os
+import time
 from hangman.words import words
 
 class Game:
@@ -24,6 +26,7 @@ class Game:
 
     def start(self):
         while not self.guessed and self.player.health.gethealth() > 0:
+            os.system("cls")
             self.interface.clear()
             self.interface.write_hint(self.hint, self.theme)
             self.interface.write_health(self.player.health.gethealth())
@@ -33,15 +36,24 @@ class Game:
             if(len(guess) == 1 and guess.isalpha()):
                 if guess in self.player.guesses:
                     self.interface.write_already_guessed()
+                    time.sleep(1)
+
                 elif guess not in self.word:
                     self.interface.write_incorrect_guess(guess)
                     self.player.setguesses(guess)
                     self.player.health.sethealth()
+                    time.sleep(1)
+
                 else:
                     self.interface.write_correct_guess()
                     self.player.setguesses(guess)
                     self.sethint(guess)
                     if "_" not in self.hint: self.guessed = True
+                    time.sleep(1)
+            else:
+                self.interface.write_invalid_guess()
+                time.sleep(1)
+
             else:
                 self.interface.write_invalid_guess()
 
