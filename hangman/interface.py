@@ -57,12 +57,21 @@ class Interface:
             else:
                 print("  Invalid input. Please try again.\n")
 
+        return input("Please guess a letter: ").upper()
+
+    def read_replay(self):
+        return input("Enter Y to replay the game or any other key to exit: ")
+
+    def write_credits(self):
+        print("***HANGMAN***")
+
     def write_hint(self, hint, theme):
         print("It is a {0} with {1} letters!".format(theme, len(hint)))
         print("Word: {0}".format(" ".join(hint)))
 
     def write_health(self, health):
         print("\nRemaining lives: {0}".format(health))
+        print("Remaining lives: {0}".format(health))
 
     def write_guessed_letters(self, guesses):
         print("Letters guessed: {0}".format(guesses))
@@ -78,6 +87,13 @@ class Interface:
 
     def write_invalid_guess(self):
         print("\nPlease enter a valid, single letter.")
+        print("Sorry! {0} is not in the word! Try again!".format(guess))
+
+    def write_correct_guess(self):
+        print("This letter is in the word!")
+
+    def write_invalid_guess(self):
+        print("Please enter a valid, single letter.")
 
     def write_won(self):
         print("Yay! You won the game!")
