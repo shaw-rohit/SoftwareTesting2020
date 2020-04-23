@@ -57,8 +57,6 @@ class Interface:
             else:
                 print("  Invalid input. Please try again.\n")
 
-        return input("Please guess a letter: ").upper()
-
     def read_replay(self):
         return input("Enter Y to replay the game or any other key to exit: ")
 
@@ -71,7 +69,6 @@ class Interface:
 
     def write_health(self, health):
         print("\nRemaining lives: {0}".format(health))
-        print("Remaining lives: {0}".format(health))
 
     def write_guessed_letters(self, guesses):
         print("Letters guessed: {0}".format(guesses))

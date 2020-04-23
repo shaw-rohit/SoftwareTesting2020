@@ -39,12 +39,3 @@ if __name__ == "__main__":
             print("Invalid input. Please try again.")
             time.sleep(1)
 
-    interface.write_credits()
-
-    replay = "Y"
-
-    while replay[0].upper() == "Y":
-        player = Player()
-        game = Game(player, interface)
-        game.start()
-        replay = interface.read_replay()

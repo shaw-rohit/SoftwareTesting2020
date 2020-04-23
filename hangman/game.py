@@ -54,11 +54,9 @@ class Game:
                 self.interface.write_invalid_guess()
                 time.sleep(1)
 
-            else:
-                self.interface.write_invalid_guess()
-
         if self.guessed:
-            self.interface.write_won()
+                self.interface.write_won()
+
         else:
             self.interface.write_lost(self.word)
 
