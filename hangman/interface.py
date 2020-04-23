@@ -84,13 +84,6 @@ class Interface:
 
     def write_invalid_guess(self):
         print("\nPlease enter a valid, single letter.")
-        print("Sorry! {0} is not in the word! Try again!".format(guess))
-
-    def write_correct_guess(self):
-        print("This letter is in the word!")
-
-    def write_invalid_guess(self):
-        print("Please enter a valid, single letter.")
 
     def write_won(self):
         print("Yay! You won the game!")
@@ -99,4 +92,5 @@ class Interface:
         print("Sorry! You ran out of health! The answer is {0}".format(word))
 
     def clear(self):
-        for i in range(1): print("\n")
+        for i in range(1):
+            print("\n")
