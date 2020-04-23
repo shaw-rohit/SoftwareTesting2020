@@ -76,8 +76,11 @@ class Interface:
     def write_already_guessed(self):
         print("You have already guessed this letter! Try again!")
 
-    def write_incorrect_guess(self, guess):
-        print("\nSorry! {0} is not in the word! Try again!".format(guess))
+    def write_incorrect_guess(self, guess, attempts_left=True):
+        if attempts_left:
+            print("\nSorry! {0} is not in the word! Try again!".format(guess))
+        else:
+            print("\nSorry! {0} is not in the word!".format(guess))
 
     def write_correct_guess(self):
         print("\nThis letter is in the word!")
@@ -86,7 +89,7 @@ class Interface:
         print("\nPlease enter a valid, single letter.")
 
     def write_won(self):
-        print("Yay! You won the game!")
+        print("\nCongratulations! You guessed the word and won the game!")
 
     def write_lost(self, word):
         print("Sorry! You ran out of health! The answer is {0}".format(word))
