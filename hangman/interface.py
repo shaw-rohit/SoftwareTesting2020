@@ -1,3 +1,5 @@
+from os import system, name
+
 class Interface:
     def __init__(self):
         pass
@@ -97,3 +99,10 @@ class Interface:
     def clear(self):
         for i in range(1):
             print("\n")
+
+    def clear_screen(self): 
+        if name == 'nt': 
+            _ = system('cls') 
+    
+        else: 
+            _ = system('clear')
