@@ -39,9 +39,12 @@ class Game:
                     time.sleep(1)
 
                 elif guess not in self.word:
-                    self.interface.write_incorrect_guess(guess)
                     self.player.setguesses(guess)
                     self.player.health.sethealth()
+                    if self.player.health.gethealth() > 0:
+                        self.interface.write_incorrect_guess(guess)
+                    else:
+                        self.interface.write_incorrect_guess(guess, attempts_left=False)
                     time.sleep(1)
 
                 else:
@@ -55,8 +58,7 @@ class Game:
                 time.sleep(1)
 
         if self.guessed:
-                self.interface.write_won()
-
+            self.interface.write_won(self.word)
         else:
             self.interface.write_lost(self.word)
 
