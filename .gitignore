@@ -1,7 +1,7 @@
 # Byte-compiled
 .cache
 .pytest_cache/
-__pycache__/
+**/*/__pycache__/
 
 # Environments
 .venv
