@@ -58,10 +58,7 @@ class Game:
                 time.sleep(1)
 
         if self.guessed:
-            os.system("cls")
-            self.interface.write_hint(self.hint, self.theme)
-            self.interface.write_health(self.player.health.gethealth())
-            self.interface.write_won()
+            self.interface.write_won(self.word)
         else:
             self.interface.write_lost(self.word)
 

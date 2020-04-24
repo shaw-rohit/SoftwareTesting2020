@@ -88,8 +88,8 @@ class Interface:
     def write_invalid_guess(self):
         print("\nPlease enter a valid, single letter.")
 
-    def write_won(self):
-        print("\nCongratulations! You guessed the word and won the game!")
+    def write_won(self, word):
+        print("\nThe word: {0}\nYou guessed the word and won the game! Congratulations!".format(word))
 
     def write_lost(self, word):
         print("Sorry! You ran out of health! The answer is {0}".format(word))
