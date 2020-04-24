@@ -89,7 +89,8 @@ class Interface:
         print("\nPlease enter a valid, single letter.")
 
     def write_won(self, word):
-        print("\nThe word: {0}\nYou guessed the word and won the game! Congratulations!".format(word))
+        print("\nWord: {0}".format(" ".join(word)))
+        print("You guessed the word and won the game! Congratulations!")
 
     def write_lost(self, word):
         print("Sorry! You ran out of health! The answer is {0}".format(word))
