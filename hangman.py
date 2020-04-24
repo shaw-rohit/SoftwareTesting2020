@@ -21,6 +21,7 @@ if __name__ == "__main__":
             menu_input_flag = 1
             interface.clear_screen()
             while replay[0].upper() == "Y":
+                interface.clear_screen()
                 player = Player()
                 game = Game(player, interface)
                 game.start()

@@ -59,11 +59,99 @@ class Interface:
             else:
                 print("  Invalid input. Please try again.\n")
 
+    def draw_hangman(self, health):
+        if health == 9:
+            print("             ")
+            print("             ")
+            print("             ")
+            print("             ")
+            print("             ")
+            print("             ")
+            print("________     ")
+
+        if health == 8:
+            print("             ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("___|____     ")
+
+        if health == 7:
+            print("   ________  ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("___|____     ")
+
+        if health == 6:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("___|____     ")
+  
+        if health == 5:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |      O  ")
+            print("   |         ")
+            print("   |         ")
+            print("   |         ")
+            print("___|____     ")
+
+        if health == 4:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |      O  ")
+            print("   |      |  ")
+            print("   |      |  ")
+            print("   |         ")
+            print("___|____     ")
+
+        if health == 3:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |      O  ")
+            print("   |     \|  ")
+            print("   |      |  ")
+            print("   |         ")
+            print("___|____     ")
+
+        if health == 2:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |      O  ")
+            print("   |     \|/ ")
+            print("   |      |  ")
+            print("   |         ")
+            print("___|____     ")
+
+        if health == 1:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |      O  ")
+            print("   |     \|/ ")
+            print("   |      |  ")
+            print("   |     /   ")
+            print("___|____     ")
+
+        if health == 0:
+            print("   ________  ")
+            print("   |      |  ")
+            print("   |      O  ")
+            print("   |     \|/ ")
+            print("   |      |  ")
+            print("   |     / \ ")
+            print("___|____     ")
+
     def read_replay(self):
         return input("Enter Y to replay the game or any other key to exit: ")
-
-    def write_credits(self):
-        print("***HANGMAN***")
 
     def write_hint(self, hint, theme):
         print("It is a {0} with {1} letters!".format(theme, len(hint)))

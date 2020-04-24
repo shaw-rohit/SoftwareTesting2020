@@ -27,6 +27,8 @@ class Game:
         while not self.guessed and self.player.health.gethealth() > 0:
             self.interface.clear_screen()
             self.interface.clear()
+            self.interface.draw_hangman(self.player.health.gethealth())
+            self.interface.clear()
             self.interface.write_hint(self.hint, self.theme)
             self.interface.write_health(self.player.health.gethealth())
             self.interface.write_guessed_letters(self.player.guesses)
