@@ -1,27 +1,29 @@
 from os import system, name
 
+
 class Interface:
     def __init__(self):
         pass
 
-    def read_player_name(self):
-        return input("Please enter your name: ")
-
     def read_player_guess(self):
-        return input("\nPlease guess a letter: ").upper()
+        self.clear()
+        return input("Please guess a letter: ").upper()
 
     def read_replay(self):
-        return input("\nEnter Y to replay the game or any other key to exit: ")
+        self.clear()
+        return input("Enter Y to replay the game or any other key to exit: ")
 
     def write_title(self):
-        print("\n _                                           ")
+        self.clear()
+        print(" _                                           ")
         print("| |                                            ")
         print("| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  ")
         print("| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ ")
         print("| | | | (_| | | | | (_| | | | | | | (_| | | | |")
         print("|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|")
         print("                    __/ |                      ")
-        print("                   |___/                     \n")
+        print("                   |___/                       ")
+        self.clear()
 
     def write_options(self):
         print("        1. Start game")
@@ -29,12 +31,14 @@ class Interface:
         print("        3. Exit")
 
     def menu_choice(self):
-        return input("\nEnter your choice (number): ")
+        self.clear()
+        return input("Enter your choice (number): ")
 
     def write_instructions(self):
         print(
-            "The objective of the game is to guess the word before the character is hung.\n"
+            "The objective of the game is to guess the word before the character is hung."
         )
+        self.clear()
         print(
             "1. You'll be presented with a row of dashes representing each letter of the word you need to guess."
         )
@@ -45,19 +49,25 @@ class Interface:
             "3. If the letter you guessed doesn't belong to the word, an appendage to the stickman hangman will be drawn and you will lose one unit of life."
         )
         print(
-            "4. You have 9 tries (lives) to guess the word. You lose the game when you run out of lives and the character is hung.\n\n"
+            "4. You have 9 tries (lives) to guess the word. You lose the game when you run out of lives and the character is hung."
         )
+        self.clear()
+        print(
+            "You can quit the game at any time by pressing the key combination Ctrl + C."
+        )
+        self.clear()
 
         input_flag = 0
 
         while input_flag == 0:
-            choice = input("  Enter X to return to main menu: ").upper()
+            choice = input("Enter X to return to main menu: ").upper()
 
             if choice == "X":
                 input_flag = 1
 
             else:
-                print("  Invalid input. Please try again.\n")
+                self.clear()
+                print("Invalid input. Please try again.")
 
     def draw_hangman(self, health):
         if health == 9:
@@ -95,7 +105,7 @@ class Interface:
             print("   |         ")
             print("   |         ")
             print("___|____     ")
-  
+
         if health == 5:
             print("   ________  ")
             print("   |      |  ")
@@ -158,7 +168,8 @@ class Interface:
         print("Word: {0}".format(" ".join(hint)))
 
     def write_health(self, health):
-        print("\nRemaining lives: {0}".format(health))
+        self.clear()
+        print("Remaining lives: {0}".format(health))
 
     def write_guessed_letters(self, guesses):
         print("Letters guessed: {0}".format(guesses))
@@ -168,29 +179,35 @@ class Interface:
 
     def write_incorrect_guess(self, guess, attempts_left=True):
         if attempts_left:
-            print("\nSorry! {0} is not in the word! Try again!".format(guess))
+            self.clear()
+            print("Sorry! {0} is not in the word! Try again!".format(guess))
         else:
-            print("\nSorry! {0} is not in the word!".format(guess))
+            self.clear()
+            print("Sorry! {0} is not in the word!".format(guess))
 
     def write_correct_guess(self):
-        print("\nThis letter is in the word!")
+        self.clear()
+        print("This letter is in the word!")
 
     def write_invalid_guess(self):
-        print("\nPlease enter a valid, single letter.")
+        self.clear()
+        print("Please enter a valid, single letter.")
 
     def write_won(self, word):
-        print("\nThe word: {0}\nYou guessed the word and won the game! Congratulations!".format(word))
+        self.clear()
+        print("You guessed the word and won the game! Congratulations!".format(word))
 
     def write_lost(self, word):
+        self.clear()
         print("Sorry! You ran out of health! The answer is {0}".format(word))
 
     def clear(self):
         for i in range(1):
             print("\n")
 
-    def clear_screen(self): 
-        if name == 'nt': 
-            _ = system('cls') 
-    
-        else: 
-            _ = system('clear')
+    def clear_screen(self):
+        if name == "nt":
+            _ = system("cls")
+
+        else:
+            _ = system("clear")
