@@ -9,7 +9,6 @@ if __name__ == "__main__":
     replay = "Y"
 
     menu_input_flag = 0
-    instructions_input_flag = 0
 
     while menu_input_flag == 0:
         interface.clear_screen()
@@ -21,6 +20,7 @@ if __name__ == "__main__":
             menu_input_flag = 1
             interface.clear_screen()
             while replay[0].upper() == "Y":
+                interface.clear_screen()
                 player = Player()
                 game = Game(player, interface)
                 game.start()
@@ -36,4 +36,4 @@ if __name__ == "__main__":
 
         else:
             print("Invalid input. Please try again.")
-            time.sleep(1)
+            time.sleep(0.5)
