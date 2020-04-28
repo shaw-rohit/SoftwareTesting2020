@@ -6,15 +6,15 @@ class Interface:
         pass
 
     def read_player_guess(self):
-        self.clear()
+        self.ins_newline()
         return input("Please guess a letter: ").upper()
 
     def read_replay(self):
-        self.clear()
+        self.ins_newline()
         return input("Enter Y to replay the game or any other key to exit: ")
 
     def write_title(self):
-        self.clear()
+        self.ins_newline()
         print(" _                                           ")
         print("| |                                            ")
         print("| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  ")
@@ -23,7 +23,7 @@ class Interface:
         print("|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|")
         print("                    __/ |                      ")
         print("                   |___/                       ")
-        self.clear()
+        self.ins_newline()
 
     def write_options(self):
         print("        1. Start game")
@@ -31,14 +31,14 @@ class Interface:
         print("        3. Exit")
 
     def menu_choice(self):
-        self.clear()
+        self.ins_newline()
         return input("Enter your choice (number): ")
 
     def write_instructions(self):
         print(
             "The objective of the game is to guess the word before the character is hung."
         )
-        self.clear()
+        self.ins_newline()
         print(
             "1. You'll be presented with a row of dashes representing each letter of the word you need to guess."
         )
@@ -51,11 +51,11 @@ class Interface:
         print(
             "4. You have 9 tries (lives) to guess the word. You lose the game when you run out of lives and the character is hung."
         )
-        self.clear()
+        self.ins_newline()
         print(
             "You can quit the game at any time by pressing the key combination Ctrl + C."
         )
-        self.clear()
+        self.ins_newline()
 
         input_flag = 0
 
@@ -66,7 +66,7 @@ class Interface:
                 input_flag = 1
 
             else:
-                self.clear()
+                self.ins_newline()
                 print("Invalid input. Please try again.")
 
     def draw_hangman(self, health):
@@ -168,7 +168,7 @@ class Interface:
         print("Word: {0}".format(" ".join(hint)))
 
     def write_health(self, health):
-        self.clear()
+        self.ins_newline()
         print("Remaining lives: {0}".format(health))
 
     def write_guessed_letters(self, guesses):
@@ -179,29 +179,29 @@ class Interface:
 
     def write_incorrect_guess(self, guess, attempts_left=True):
         if attempts_left:
-            self.clear()
+            self.ins_newline()
             print("Sorry! {0} is not in the word! Try again!".format(guess))
         else:
-            self.clear()
+            self.ins_newline()
             print("Sorry! {0} is not in the word!".format(guess))
 
     def write_correct_guess(self):
-        self.clear()
+        self.ins_newline()
         print("This letter is in the word!")
 
     def write_invalid_guess(self):
-        self.clear()
+        self.ins_newline()
         print("Please enter a valid, single letter.")
 
     def write_won(self, word):
-        self.clear()
+        self.ins_newline()
         print("You guessed the word and won the game! Congratulations!".format(word))
 
     def write_lost(self, word):
-        self.clear()
+        self.ins_newline()
         print("Sorry! You ran out of health! The answer is {0}".format(word))
 
-    def clear(self):
+    def ins_newline(self):
         for i in range(1):
             print("\n")
 

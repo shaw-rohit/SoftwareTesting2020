@@ -32,7 +32,6 @@ class Game:
             if len(guess) == 1 and guess.isalpha():
                 if guess in self.player.guesses:
                     self.interface.write_already_guessed()
-                    time.sleep(0.5)
 
                 elif guess not in self.word:
                     self.player.setguesses(guess)
@@ -41,7 +40,6 @@ class Game:
                         self.interface.write_incorrect_guess(guess)
                     else:
                         self.interface.write_incorrect_guess(guess, attempts_left=False)
-                    time.sleep(0.5)
 
                 else:
                     self.interface.write_correct_guess()
@@ -49,14 +47,16 @@ class Game:
                     self.sethint(guess)
                     if "_" not in self.hint:
                         self.guessed = True
-                    time.sleep(0.5)
+
             else:
                 self.interface.write_invalid_guess()
-                time.sleep(0.5)
+                
+            time.sleep(0.5)
 
         if self.guessed:
             self.print_graphics()
             self.interface.write_won(self.word)
+
         else:
             self.print_graphics()
             self.interface.write_lost(self.word)
@@ -67,9 +67,9 @@ class Game:
 
     def print_graphics(self):
         self.interface.clear_screen()
-        self.interface.clear()
+        self.interface.ins_newline()
         self.interface.draw_hangman(self.player.health.gethealth())
-        self.interface.clear()
+        self.interface.ins_newline()
         self.interface.write_hint(self.hint, self.theme)
         self.interface.write_health(self.player.health.gethealth())
         self.interface.write_guessed_letters(self.player.guesses)
