@@ -1,4 +1,5 @@
 import time
+import sys
 from hangman.game import Game
 from hangman.interface import Interface
 from hangman.player import Player
@@ -32,7 +33,7 @@ def main():
             interface.write_instructions()
 
         elif menu_choice == "3":
-            exit()
+            sys.exit(0)
 
         else:
             print("Invalid input. Please try again.")
