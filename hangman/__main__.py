@@ -3,7 +3,7 @@ from hangman.game import Game
 from hangman.interface import Interface
 from hangman.player import Player
 
-if __name__ == "__main__":
+def main():
     interface = Interface()
 
     replay = "Y"
