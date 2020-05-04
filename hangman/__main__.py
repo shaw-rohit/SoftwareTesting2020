@@ -20,7 +20,7 @@ def main():
         if menu_choice == "1":
             menu_input_flag = 1
             interface.clear_screen()
-            while replay[0].upper() == "Y":
+            while replay == "Y":
                 interface.clear_screen()
                 player = Player()
                 game = Game(player, interface)
