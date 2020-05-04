@@ -109,7 +109,7 @@ def test_read_player_guess(monkeypatch):
             assert len(response) > 0
 
 
-    def test_write_instructions(capsys, monkeypatch):
+    def test_write_instructions(monkeypatch):
         """
         Ouptput correctness test to ensure that instructions are printed on
         screen
@@ -144,8 +144,134 @@ def test_read_player_guess(monkeypatch):
         initial_input_flag = interface.write_instructions.input_flag
         assert initial_input_flag == INPUT_FLAG_ZERO
 
-    def test_write_instructions():
+
+    def test_draw_hangman():
         """
+        This method might not be suitable or necessary for unit tests. A
+        walkthrough style of analysis might be more useful
         """
         pass
+
+
+    def test_write_hint(capsys):
+        """
+        Output Correctness Check to ensure correct user hints and final words
+        are displayed
+        """
+        interface = Interface()
+        hint = interface.write_hint.hint
+        theme = interface.write_hint.theme
+
+        helpful_hint = "It is a " +  theme + " with " + len(hint) + " letters!"
+        correct_word = "Word: " + hint
+
+        user_hints = capsys.readouterr()
+        assert user_hints.out == helpful_hint + "\n" + correct_word 
+
+
+    def test_write_health(capsys):
+        """
+        Output Correctness Check to ensure correct user health 
+        """
+
+        interface = Interface()
+        hint = interface.write_hint.hint
+        theme = interface.write_hint.theme
+
+        helpful_hint = "It is a " +  theme + " with " + len(hint) + " letters!"
+        correct_word = "Word: " + hint
+        
+        user_hints = capsys.readouterr()
+        assert user_hints.out == helpful_hint + "\n" + correct_word 
+
+    def test_write_guessed_letters(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        user_guesses = interface.write_guessed_letters.guesses
+        GUESSED_PROMPT = "Letters guessed: " + user_guesses
+
+        prompt = capsys.readouterr()
+        assert prompt.out == GUESSED_PROMPT
+
+    def test_write_already_guessed(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        GUESSED_PROMPT = "You have already guessed this letter! Try again!"
+
+        prompt = capsys.readouterr()
+        assert prompt.out == GUESSED_PROMPT
+
+    def test_write_incorrect_guess(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        user_guess = interface.write_incorrect_guess.guess
+        user_attempts_left = interface.write_incorrect_guess.attempts_left
+        ATTEMPTS_LEFT = "Sorry! " + user_guess + " is not in the word! Try again!"
+        NO_ATTEMPTS_LEFT = "Sorry! " + user_guess + " is not in the word!"
+
+        prompt = capsys.readouterr()
+        if user_attempts_left:
+            assert prompt.out == ATTEMPTS_LEFT
+        else:
+            assert prompt.out == NO_ATTEMPTS_LEFT
+
+    def test_write_correct_guess(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        GUESSED_PROMPT = "This letter is in the word!"
+
+        prompt = capsys.readouterr()
+        assert prompt.out == GUESSED_PROMPT
+
+    def test_write_invalid_guess(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        GUESSED_PROMPT = "Please enter a valid, single letter."
+
+        prompt = capsys.readouterr()
+        assert prompt.out == GUESSED_PROMPT
+
+    def test_write_won(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        GUESSED_PROMPT = "You've guessed the word and won the game! Congratulations!"
+
+        prompt = capsys.readouterr()
+        assert prompt.out == GUESSED_PROMPT
+
+
+    def test_write_lost(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+        interface = Interface()
+        correct_word = interface.write_lost().word
+        GUESSED_PROMPT = "Sorry! You ran out of health! The answer is " + correct_word
+
+        prompt = capsys.readouterr()
+        assert prompt.out == GUESSED_PROMPT
+
+
+    def test_ins_newline(capsys):
+        """
+        Correctness Check: Does the method print as required
+        """
+
+        interface = Interface
+        GET_RANGE_LENGTH = interface.ins_newline.SET_RANGE_LENGTH
+
+        prompt = capsys.readouterr
+        assert prompt.out ==  len(GET_RANGE_LENGTH)
 
