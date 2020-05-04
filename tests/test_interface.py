@@ -33,13 +33,12 @@ def test_read_player_guess(monkeypatch):
         m.setattr('builtins.input', lambda prompt="": "@")
         interface = Interface()
         assert not interface.read_player_guess().isupper()
-    
+
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": " ")
         interface = Interface()
         assert not interface.read_player_guess().isupper()
 
-    
     def test_read_replay(monkeypatch):
         """
         Input validation/Data validation test to check replay input is upper
@@ -65,7 +64,33 @@ def test_read_player_guess(monkeypatch):
             response = interface.read_player_guess()
             assert len(response.isupper()[0]) == REQUIRED_LENGTH
 
+    def test_write_title():
+        """
+        """
+        pass
+        # HANGMAN_TITLE = 
+        # interface = Interface()
+        # title = capsys.readouterr()
+        # assert title.out == HANGMAN_TITLE
+
+    def test_write_options(capsys):
+        """
+        Output Validation test to check that the print statements are as
+        required
+        """
+        interface = Interface()
+        PRINT_START = "        1. Start game"
+        PRINT_READ = "        2. Read instructions"
+        PRINT_EXIT = "        3. Exit"
+        PRINT_INSTRUCTIONS = PRINT_START + PRINT_READ + PRINT_EXIT
+
+        options = capsys.readouterr()
+        assert options.out == PRINT_INSTRUCTIONS
+
+
+
     def test_write_instructions():
         """
         """
+        pass
 
