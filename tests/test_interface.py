@@ -1,5 +1,4 @@
-import os
-import sys
+from os import system, name
 from io import StringIO
 from .context import hangman
 from hangman.interface import Interface
@@ -274,4 +273,18 @@ def test_read_player_guess(monkeypatch):
 
         prompt = capsys.readouterr
         assert prompt.out ==  len(GET_RANGE_LENGTH)
+
+
+    def test_clear_screen(capsys):
+        """
+        System Behaviour Check to test if the os method coorectly detect the os and
+        clear screen
+        """
+        interface = Interface
+
+        prompt = capsys.readouterr
+        if name == "nt":
+            assert prompt.out == system("cls")
+        else:
+            assert prompt.out == system("clear") 
 
