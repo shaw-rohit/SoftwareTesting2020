@@ -25,26 +25,26 @@ class Game:
         return hist
 
     def start(self):
-        while self.player.health.gethealth() > 0:
+        while self.player.isalive():
             self.print_graphics()
             guess = Guess(self.interface.read_player_guess())
 
             if not guess.isvalid():
                 self.interface.write_invalid_guess()
 
-            elif guess.isguessed(self.player.guesses):
+            elif guess.isguessed(self.player.getguesses()):
                 self.interface.write_already_guessed()
 
             elif not guess.iscorrect(self.word):
-                self.player.setguesses(guess.value)
+                self.player.setguesses(guess.getvalue())
                 self.player.health.sethealth()
-                self.interface.write_incorrect_guess(guess.value,
+                self.interface.write_incorrect_guess(guess.getvalue(),
                         self.player.health.gethealth())
 
             else:
                 self.interface.write_correct_guess()
-                self.player.setguesses(guess.value)
-                self.sethint(guess.value)
+                self.player.setguesses(guess.getvalue())
+                self.sethint(guess.getvalue())
 
                 if "_" not in self.hint:
                     self.won()
@@ -73,4 +73,4 @@ class Game:
         self.interface.ins_newline()
         self.interface.write_hint(self.hint, self.theme)
         self.interface.write_health(self.player.health.gethealth())
-        self.interface.write_guessed_letters(self.player.guesses)
+        self.interface.write_guessed_letters(self.player.getguesses())
