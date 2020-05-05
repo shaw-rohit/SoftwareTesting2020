@@ -77,5 +77,12 @@ class TestPlayer(TestCase):
         self.guess.value = 'O'
         self.assertTrue(self.guess.iscorrect('FOO'))
 
+    def test_getvalue(self):
+        """
+        1. getvalue returns value
+        """
+
+        self.assertEqual(self.guess.value, 'A')
+
 
 

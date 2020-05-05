@@ -10,3 +10,6 @@ class Guess():
 
     def iscorrect(self, word):
         return self.value in word
+
+    def getvalue(self):
+        return self.value
