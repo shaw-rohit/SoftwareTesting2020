@@ -83,6 +83,3 @@ class TestPlayer(TestCase):
         """
 
         self.assertEqual(self.guess.value, 'A')
-
-
-

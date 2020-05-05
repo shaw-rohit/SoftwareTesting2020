@@ -6,12 +6,12 @@ from hangman.guess import Guess
 
 class Game:
     def __init__(self, player, interface):
-        self.player = player
+        self.player    = player
         self.interface = interface
-        self.theme = random.choice(list(words.keys()))
-        self.word = random.choice(words.get(self.theme)).upper()
-        self.hint = "_" * len(self.word)
-        self.hist = self.create_hist()
+        self.theme     = random.choice(list(words.keys()))
+        self.word      = random.choice(words.get(self.theme)).upper()
+        self.hint      = "_" * len(self.word)
+        self.hist      = self.create_hist()
 
     def create_hist(self):
         hist = {}

@@ -50,4 +50,3 @@ class TestPlayer(TestCase):
         # 3.
         self.player.health.sethealth()
         self.assertFalse(self.player.isalive())
-
