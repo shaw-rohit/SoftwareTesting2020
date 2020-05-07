@@ -3,6 +3,7 @@ from io import StringIO
 from .context import hangman
 from hangman.interface import Interface
 
+interface = Interface()
 
 def test_read_player_guess(monkeypatch):
     """
@@ -10,32 +11,26 @@ def test_read_player_guess(monkeypatch):
     """
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": "M")
-        interface = Interface()
         assert interface.read_player_guess().isupper()
 
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": "m")
-        interface = Interface()
         assert interface.read_player_guess().isupper()
 
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": "mm")
-        interface = Interface()
         assert interface.read_player_guess().isupper()
 
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": "1")
-        interface = Interface()
         assert not interface.read_player_guess().isupper()
 
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": "@")
-        interface = Interface()
         assert not interface.read_player_guess().isupper()
 
     with monkeypatch.context() as m:
         m.setattr('builtins.input', lambda prompt="": " ")
-        interface = Interface()
         assert not interface.read_player_guess().isupper()
 
     def test_read_replay(monkeypatch):
@@ -47,19 +42,16 @@ def test_read_player_guess(monkeypatch):
 
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="": "y")
-            interface = Interface()
             response = interface.read_player_guess()
             assert len(response.isupper()[0]) == REQUIRED_LENGTH
 
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="": "Y")
-            interface = Interface()
             response = interface.read_player_guess()
             assert len(response.isupper()[0]) == REQUIRED_LENGTH
 
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="": "Yes")
-            interface = Interface()
             response = interface.read_player_guess()
             assert len(response.isupper()[0]) == REQUIRED_LENGTH
 
@@ -67,18 +59,17 @@ def test_read_player_guess(monkeypatch):
         """
         Output Correctness test to check if hangman banner is correct
         """
-        title_line1 = " _                                           "
-        title_line2 = "| |                                            "
-        title_line3 = "| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  "
-        title_line4 = "| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ "
-        title_line5 = "| | | | (_| | | | | (_| | | | | | | (_| | | | |"
-        title_line6 = "|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|"
-        title_line7 = "                    __/ |                      "
-        title_line8 = "                   |___/                       "
-        HANGMAN_TITLE = title_line1 + title_line2 + title_line3 + \
-                title_line4 + title_line5 + title_line6 + \
-                title_line7 + title_line8
-        interface = Interface()
+        title_line1 = r" _                                           "
+        title_line2 = r"| |                                            "
+        title_line3 = r"| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  "
+        title_line4 = r"| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ "
+        title_line5 = r"| | | | (_| | | | | (_| | | | | | | (_| | | | |"
+        title_line6 = r"|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|"
+        title_line7 = r"                    __/ |                      "
+        title_line8 = r"                   |___/                       "
+        HANGMAN_TITLE = (title_line1 + title_line2 + title_line3 + 
+                title_line4 + title_line5 + title_line6 + 
+                title_line7 + title_line8)
         title = capsys.readouterr()
         assert title.out == HANGMAN_TITLE
 
@@ -87,7 +78,6 @@ def test_read_player_guess(monkeypatch):
         Output Validation test to check that the print statements are as
         required
         """
-        interface = Interface()
         PRINT_START = "        1. Start game"
         PRINT_READ = "        2. Read instructions"
         PRINT_EXIT = "        3. Exit"
@@ -103,10 +93,8 @@ def test_read_player_guess(monkeypatch):
         """
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="":"1")
-            interface = Interface()
             response = interface.menu_choice()
             assert len(response) > 0
-
 
     def test_write_instructions(monkeypatch):
         """
@@ -117,32 +105,26 @@ def test_read_player_guess(monkeypatch):
         Initial Values test checks validity of input_flag's initialized value
         and updated value
         """
-
-        interface = Interface()
         INPUT_FLAG_ZERO = 0
         INPUT_FLAG_ONE = 1
 
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="":"x")
-            interface = Interface()
             response = interface.write_instructions().input_flag
             assert response == INPUT_FLAG_ONE
 
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="":"w")
-            interface = Interface()
             response = interface.write_instructions().input_flag
             assert response != INPUT_FLAG_ONE
 
         with monkeypatch.context() as m:
             m.setattr('builtins.input', lambda prompt="":"x")
-            interface = Interface()
             response = interface.write_instructions().choice
             assert choice.isupper()
         
         initial_input_flag = interface.write_instructions.input_flag
         assert initial_input_flag == INPUT_FLAG_ZERO
-
 
     def test_draw_hangman():
         """
@@ -151,13 +133,11 @@ def test_read_player_guess(monkeypatch):
         """
         pass
 
-
     def test_write_hint(capsys):
         """
         Output Correctness Check to ensure correct user hints and final words
         are displayed
         """
-        interface = Interface()
         hint = interface.write_hint.hint
         theme = interface.write_hint.theme
 
@@ -167,13 +147,11 @@ def test_read_player_guess(monkeypatch):
         user_hints = capsys.readouterr()
         assert user_hints.out == helpful_hint + "\n" + correct_word 
 
-
     def test_write_health(capsys):
         """
         Output Correctness Check to ensure correct user health 
         """
 
-        interface = Interface()
         hint = interface.write_hint.hint
         theme = interface.write_hint.theme
 
@@ -187,7 +165,6 @@ def test_read_player_guess(monkeypatch):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         user_guesses = interface.write_guessed_letters.guesses
         GUESSED_PROMPT = "Letters guessed: " + user_guesses
 
@@ -198,7 +175,6 @@ def test_read_player_guess(monkeypatch):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         GUESSED_PROMPT = "You have already guessed this letter! Try again!"
 
         prompt = capsys.readouterr()
@@ -208,7 +184,6 @@ def test_read_player_guess(monkeypatch):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         user_guess = interface.write_incorrect_guess.guess
         user_attempts_left = interface.write_incorrect_guess.attempts_left
         ATTEMPTS_LEFT = "Sorry! " + user_guess + " is not in the word! Try again!"
@@ -224,7 +199,6 @@ def test_read_player_guess(monkeypatch):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         GUESSED_PROMPT = "This letter is in the word!"
 
         prompt = capsys.readouterr()
@@ -234,7 +208,6 @@ def test_read_player_guess(monkeypatch):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         GUESSED_PROMPT = "Please enter a valid, single letter."
 
         prompt = capsys.readouterr()
@@ -244,44 +217,35 @@ def test_read_player_guess(monkeypatch):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         GUESSED_PROMPT = "You've guessed the word and won the game! Congratulations!"
 
         prompt = capsys.readouterr()
         assert prompt.out == GUESSED_PROMPT
 
-
     def test_write_lost(capsys):
         """
         Correctness Check: Does the method print as required
         """
-        interface = Interface()
         correct_word = interface.write_lost().word
         GUESSED_PROMPT = "Sorry! You ran out of health! The answer is " + correct_word
 
         prompt = capsys.readouterr()
         assert prompt.out == GUESSED_PROMPT
 
-
     def test_ins_newline(capsys):
         """
         Correctness Check: Does the method print as required
         """
-
-        interface = Interface
         GET_RANGE_LENGTH = interface.ins_newline.SET_RANGE_LENGTH
 
         prompt = capsys.readouterr
         assert prompt.out ==  len(GET_RANGE_LENGTH)
-
 
     def test_clear_screen(capsys):
         """
         System Behaviour Check to test if the os method coorectly detect the os and
         clear screen
         """
-        interface = Interface
-
         prompt = capsys.readouterr
         if name == "nt":
             assert prompt.out == system("cls")
