@@ -8,3 +8,9 @@ class Player:
 
     def setguesses(self, guess):
         self.guesses.append(guess)
+
+    def getguesses(self):
+        return self.guesses
+
+    def isalive(self):
+        return self.health.gethealth() > 0

@@ -177,12 +177,12 @@ class Interface:
     def write_already_guessed(self):
         print("You have already guessed this letter! Try again!")
 
-    def write_incorrect_guess(self, guess, attempts_left=True):
-        if attempts_left:
-            self.ins_newline()
+    def write_incorrect_guess(self, guess, health):
+        self.ins_newline()
+
+        if health > 0:
             print("Sorry! {0} is not in the word! Try again!".format(guess))
         else:
-            self.ins_newline()
             print("Sorry! {0} is not in the word!".format(guess))
 
     def write_correct_guess(self):
