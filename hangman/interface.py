@@ -11,7 +11,7 @@ class Interface:
 
     def read_replay(self):
         self.ins_newline()
-        return input("Enter Y to replay the game or any other key to exit: ")
+        return input("Enter Y to replay the game or any other key to exit:").upper()[0]
 
     def write_title(self):
         self.ins_newline()
@@ -195,14 +195,15 @@ class Interface:
 
     def write_won(self, word):
         self.ins_newline()
-        print("You guessed the word and won the game! Congratulations!".format(word))
+        print("You guessed the word and won the game! Congratulations!")
 
     def write_lost(self, word):
         self.ins_newline()
         print("Sorry! You ran out of health! The answer is {0}".format(word))
 
     def ins_newline(self):
-        for i in range(1):
+        SET_RANGE_LENGTH = 1
+        for i in range(SET_RANGE_LENGTH):
             print("\n")
 
     def clear_screen(self):
