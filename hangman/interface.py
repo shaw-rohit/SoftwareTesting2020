@@ -64,7 +64,6 @@ class Interface:
 
             if choice == "X":
                 input_flag = 1
-
             else:
                 self.ins_newline()
                 print("Invalid input. Please try again.")
@@ -193,7 +192,7 @@ class Interface:
         self.ins_newline()
         print("Please enter a valid, single letter.")
 
-    def write_won(self, word):
+    def write_won(self):
         self.ins_newline()
         print("You guessed the word and won the game! Congratulations!")
 
